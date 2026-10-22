@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PREPA DIPLOME D’ETAT (D.E)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="accessPage" class="access-page">
+  <div class="access-shell">
+    <div class="access-card">
+      <div class="access-top">
+        <div class="access-branding no-logo">
+          <div class="access-title-wrap">
+            <h1 class="access-title">PREPA DIPLOME D’ETAT (D.E)</h1>
+            <p class="access-subtitle">Exercices en ligne · Espace étudiant</p>
+          </div>
+        </div>
+        <div class="access-badge">Identification</div>
+      </div>
+
+      <div class="access-divider"></div>
+
+      <div class="access-body">
+        <form id="studentAccessForm" onsubmit="event.preventDefault();enterWithFullName();">
+        <label for="accessFullName" class="access-label">Nom et prénoms</label>
+        <input id="accessFullName" class="access-input" type="text" placeholder="Vos nom et prénoms" autocomplete="name" required maxlength="160" />
+        <label for="accessFiliere" class="access-label">Filière</label>
+        <select id="accessFiliere" class="access-input" required><option value="">Choisir votre filière</option><option>IDE</option><option>SFM</option></select>
+        <label for="accessAntenne" class="access-label">Antenne</label>
+        <select id="accessAntenne" class="access-input" required><option value="">Choisir votre antenne</option><option>ABIDJAN</option><option>ABOISSO</option><option>ABENGOUROU</option><option>AGBOVILLE</option><option>DALOA</option><option>MAN</option><option>BOUAKE</option><option>KORHOGO</option></select>
+        <label for="accessWhatsapp" class="access-label">Numéro WhatsApp</label>
+        <input id="accessWhatsapp" class="access-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ex. : 0708190886 ou +2250708190886" required maxlength="24" />
+        <button type="submit" class="access-button">Accéder à mes exercices</button>
+        </form>
+      </div>
+    </div>
+
+    <p class="access-footer">Tirbuce Beda 0708190886</p>
+  </div>
+</div>
+
+<script>
+function enterWithFullName() {
+  const form = document.getElementById("studentAccessForm");
+  if (!form.reportValidity()) return;
+  const nom = document.getElementById("accessFullName").value.trim().replace(/\s+/g, " ");
+  const filiere = document.getElementById("accessFiliere").value;
+  const antenne = document.getElementById("accessAntenne").value;
+  const telephone = document.getElementById("accessWhatsapp").value.replace(/[\s().-]/g, "");
+  if (!nom || !['IDE', 'SFM'].includes(filiere) || !["ABIDJAN", "ABOISSO", "ABENGOUROU", "AGBOVILLE", "DALOA", "MAN", "BOUAKE", "KORHOGO"].includes(antenne)) {
+    alert("Veuillez renseigner votre nom, votre filière et votre antenne."); return;
+  }
+  if (!/^(?:\+?225)?(?:01|05|07)\d{8}$/.test(telephone)) {
+    alert("Saisissez un numéro WhatsApp ivoirien valide à 10 chiffres, avec ou sans +225."); return;
+  }
+  const student = { nom, prenom: "", nomComplet: nom, filiere, antenne, telephone,
+    matricule: nom.toLocaleLowerCase('fr') + "|" + telephone.replace(/^\+?225/, "") };
+  sessionStorage.setItem("PREPA_STUDENT_PROFILE_V1", JSON.stringify(student));
+  window.activeStudentFullName = student.matricule;
+  localStorage.removeItem("REVISION_LICENCE_1_ACTIVE_FULL_NAME");
+
+  document.getElementById("accessPage").style.display = "none";
+  document.getElementById("siteHeader").style.display = "block";
+  document.getElementById("mainContent").style.display = "block";
+  document.getElementById("siteFooter").style.display = "block";
+
+  if (typeof showHome === 'function') {
+    showHome();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("accessFullName");
+  if (input) input.focus();
+});
+</script>
+
+<header id="siteHeader" class="student-site-header" style="display:none;">
+  <div class="container student-topbar">
+    <div class="student-topbar-title">
+      <h1>PREPA DIPLOME D’ETAT (D.E) – Espace Étudiant</h1>
+    </div>
+    <div class="student-topbar-actions">
+      <div id="studentHeaderName" class="student-topbar-name">APPRENANT |</div>
+      <button class="student-settings-btn" onclick="openQuizSettings()">⚙ Paramètres</button>
+      <button class="student-logout-btn" onclick="logoutStudent()">Déconnexion</button>
+    </div>
+  </div>
+</header>
+
+<main class="container" id="mainContent" style="display:none;">
+  <section id="homeView" class="student-home"></section>
+
+  <section id="quizView" class="hidden"></section>
+  <section id="resultView" class="hidden"></section>
+
+  <section id="adminView" class="panel hidden">
+    <div class="topbar">
+      <div>
+        <h2>Espace ADMIN</h2>
+        <p class="muted">Ajoute, modifie ou supprime les sujets. Les changements sont sauvegardés automatiquement.</p>
+      </div>
+      <div class="actions">
+        <button class="btn-green" onclick="openSubjectEditor()">+ Ajouter un sujet</button>
+        <button class="btn-orange" onclick="resetDefaultSubjects()">Réinitialiser les sujets par défaut</button>
+        <button class="btn-light" onclick="showHome()">Retour étudiant</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button onclick="renderAdminSubjects()">Sujets</button>
+      <button onclick="renderAdminResults()">Résultats</button>
+    </div>
+    <div id="adminContent"></div>
+  </section>
+</main>
+
+<footer id="siteFooter" class="site-contact-footer" style="display:none;">Tirbuce Beda 0708190886</footer>
+
+<div id="modal" class="modal hidden"></div>
+
+<script src="neuro-subjects.js"></script>
+<script src="sujet-pediatrie-abengourou.js"></script>
+<script src="resultats-config.js"></script>
+<script src="resultats-envoi.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

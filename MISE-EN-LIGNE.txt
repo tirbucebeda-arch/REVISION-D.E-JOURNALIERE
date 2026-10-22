@@ -1,0 +1,4 @@
+Identification sans code : nom et prénoms, filière IDE/SFM, antenne, numéro WhatsApp obligatoires.
+Le numéro WhatsApp est transmis dans le champ telephone et dans le champ whatsapp. Le script Google existant le place dans la colonne Téléphone.
+Les colonnes Total, Temps et Note /20 contiennent le nombre de questions, le temps utilisé et la note.
+Remplacer les fichiers du site en ligne par ceux de ce dossier. Tester une composition puis vérifier sa réception dans Google Sheets.
