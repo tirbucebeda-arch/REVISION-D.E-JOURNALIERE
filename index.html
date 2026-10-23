@@ -31,8 +31,6 @@
         <select id="accessFiliere" class="access-input" required><option value="">Choisir votre filière</option><option>IDE</option><option>SFM</option></select>
         <label for="accessAntenne" class="access-label">Antenne</label>
         <select id="accessAntenne" class="access-input" required><option value="">Choisir votre antenne</option><option>ABIDJAN</option><option>ABOISSO</option><option>ABENGOUROU</option><option>AGBOVILLE</option><option>DALOA</option><option>MAN</option><option>BOUAKE</option><option>KORHOGO</option></select>
-        <label for="accessWhatsapp" class="access-label">Numéro WhatsApp</label>
-        <input id="accessWhatsapp" class="access-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ex. : 0708190886 ou +2250708190886" required maxlength="24" />
         <button type="submit" class="access-button">Accéder à mes exercices</button>
         </form>
       </div>
@@ -42,6 +40,15 @@
   </div>
 </div>
 
+<dialog id="revisionInfo" aria-labelledby="revisionInfoTitle" style="width:min(90vw,480px);box-sizing:border-box;border:0;border-radius:18px;padding:26px;line-height:1.6;max-height:90dvh;overflow:auto;">
+  <h2 id="revisionInfoTitle">Information</h2>
+  <p>Il existe des groupes de révision du D.E. par antenne pour s’entraider et préparer l’examen ensemble.</p>
+  <p><strong>Tu souhaites rejoindre le groupe WhatsApp de révision de ton antenne ?</strong></p>
+  <p>Clique sur <a href="https://wa.me/2250708190886?text=Bonjour%20Tirbuce%20Beda%2C%20je%20souhaite%20rejoindre%20le%20groupe%20de%20r%C3%A9vision%20de%20mon%20antenne." target="_blank" rel="noopener noreferrer"><strong>0708190886 — Tirbuce Beda</strong></a> et précise ton nom, ta filière et ton antenne.</p>
+  <form method="dialog"><button class="access-button" autofocus>Continuer vers les exercices</button></form>
+</dialog>
+<style>#revisionInfo::backdrop{background:rgba(15,23,42,.65)}#revisionInfo a{color:#087b43;text-decoration:underline}</style>
+
 <script>
 function enterWithFullName() {
   const form = document.getElementById("studentAccessForm");
@@ -49,15 +56,11 @@ function enterWithFullName() {
   const nom = document.getElementById("accessFullName").value.trim().replace(/\s+/g, " ");
   const filiere = document.getElementById("accessFiliere").value;
   const antenne = document.getElementById("accessAntenne").value;
-  const telephone = document.getElementById("accessWhatsapp").value.replace(/[\s().-]/g, "");
-  if (!nom || !['IDE', 'SFM'].includes(filiere) || !["ABIDJAN", "ABOISSO", "ABENGOUROU", "AGBOVILLE", "DALOA", "MAN", "BOUAKE", "KORHOGO"].includes(antenne)) {
-    alert("Veuillez renseigner votre nom, votre filière et votre antenne."); return;
+  if (!nom || !["IDE", "SFM"].includes(filiere) || !["ABIDJAN", "ABOISSO", "ABENGOUROU", "AGBOVILLE", "DALOA", "MAN", "BOUAKE", "KORHOGO"].includes(antenne)) {
+    alert("Veuillez renseigner votre nom et vos prénoms, puis choisir votre filière et votre antenne."); return;
   }
-  if (!/^(?:\+?225)?(?:01|05|07)\d{8}$/.test(telephone)) {
-    alert("Saisissez un numéro WhatsApp ivoirien valide à 10 chiffres, avec ou sans +225."); return;
-  }
-  const student = { nom, prenom: "", nomComplet: nom, filiere, antenne, telephone,
-    matricule: nom.toLocaleLowerCase('fr') + "|" + telephone.replace(/^\+?225/, "") };
+  const student = { nom, prenom: "", nomComplet: nom, filiere, antenne, telephone: "",
+    matricule: nom.toLocaleLowerCase('fr') + "|" + antenne };
   sessionStorage.setItem("PREPA_STUDENT_PROFILE_V1", JSON.stringify(student));
   window.activeStudentFullName = student.matricule;
   localStorage.removeItem("REVISION_LICENCE_1_ACTIVE_FULL_NAME");
@@ -70,6 +73,7 @@ function enterWithFullName() {
   if (typeof showHome === 'function') {
     showHome();
   }
+  document.getElementById('revisionInfo').showModal();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -123,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <div id="modal" class="modal hidden"></div>
 
 <script src="neuro-subjects.js"></script>
-<script src="sujet-pediatrie-abengourou.js"></script>
+<script src="sujet-sante-publique-abengourou.js"></script>
 <script src="resultats-config.js"></script>
 <script src="resultats-envoi.js"></script>
 <script src="script.js"></script>
