@@ -1,7 +1,4 @@
-Modifications effectuées le 20/09/2026
-- Ajout du sujet Santé publique AS (50 questions) depuis aa.docx.
-- Matière : Santé publique.
-- 50 questions sélectionnées par défaut.
-- Affichage par défaut : toutes les questions.
-- Caméra désactivée de façon permanente.
-- Titre visible du site : SANTÉ PUBLIQUE.
+Anciens sujets retirés.
+Médecine : 50 questions. Gynécologie-obstétrique : 56 questions.
+Durée : 60 minutes. Affichage question par question. Anti-triche activé.
+Corrigés, explications et sources après l’évaluation.

@@ -10,7 +10,7 @@
       subjects: window.PREPA_SUBJECTS || []
     };
 
-    const STORAGE_SUBJECTS = "PREPA_DE_subjects_abengourou_2026_v13";
+    const STORAGE_SUBJECTS = "PREPA_DE_medecine_gyneco_abengourou_20261025_v1";
     const STORAGE_RESULTS = "NEUROCHIRURGIE_L3_results_v1";
     const STORAGE_ATTEMPTS = "NEUROCHIRURGIE_L3_attempts_v1";
 
@@ -25,7 +25,7 @@
     const QUIZ_SETTINGS_KEY = "APPRENTISSAGE_EVALUATION_quiz_settings_v2";
     const DEFAULT_QUIZ_SETTINGS = {
       questionCount: 0,
-      displayMode: "all",
+      displayMode: "single",
       questionType: "both",
       cameraEnabled: false,
       antiCheatEnabled: true
@@ -65,7 +65,7 @@
       try {
         const saved = { ...DEFAULT_QUIZ_SETTINGS, ...JSON.parse(localStorage.getItem(QUIZ_SETTINGS_KEY) || "{}") };
         saved.cameraEnabled = false;
-        saved.displayMode = "all";
+        saved.displayMode = "single";
         saved.questionType = "both";
         saved.antiCheatEnabled = true;
         return saved;
