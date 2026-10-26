@@ -1,4 +1,7 @@
-Anciens sujets retirés.
-Médecine : 50 questions. Gynécologie-obstétrique : 56 questions.
-Durée : 60 minutes. Affichage question par question. Anti-triche activé.
-Corrigés, explications et sources après l’évaluation.
+Médecine : 50 questions
+Gynécologie-obstétrique : 56 questions
+Chirurgie : 55 questions
+SSR / PF / GU / Genre : 50 questions
+Pédiatrie : 46 questions
+Santé publique : 58 questions
+Choix libre du sujet. Durée : 60 minutes. Question par question. Anti-triche activé.

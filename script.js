@@ -10,7 +10,7 @@
       subjects: window.PREPA_SUBJECTS || []
     };
 
-    const STORAGE_SUBJECTS = "PREPA_DE_medecine_gyneco_abengourou_20261025_v1";
+    const STORAGE_SUBJECTS = "PREPA_DE_six_matieres_abengourou_20261026_v2";
     const STORAGE_RESULTS = "NEUROCHIRURGIE_L3_results_v1";
     const STORAGE_ATTEMPTS = "NEUROCHIRURGIE_L3_attempts_v1";
 
@@ -427,7 +427,7 @@
           </div>
           <p class="student-evaluation-meta"><strong>Matière :</strong> ${escapeHTML(availableSubject.matter)}</p>
           <p class="student-evaluation-meta"><strong>Durée :</strong> ${availableSubject.duration} min</p>
-          <p class="student-evaluation-meta"><strong>Questions :</strong> ${availableSubject.questions.length} — toutes affichées sur une page</p>
+          <p class="student-evaluation-meta"><strong>Questions :</strong> ${availableSubject.questions.length} — une question à la fois</p>
           <p class="student-evaluation-meta"><strong>Fermeture :</strong> ${formatDateTime(availableSubject.closeDate, availableSubject.closeTime)}</p>
           <button class="student-start-btn" onclick="startQuickEvaluation('${availableSubject.id}')">Commencer</button>
         </div>
@@ -448,7 +448,7 @@
           </section>
 
           <section id="studentAvailableSection" class="student-section-card">
-            <h3>${availableSubjects.length ? "Sujet disponible" : "Sujets"}</h3>
+            <h3>${availableSubjects.length ? "Choisissez votre matière" : "Sujets"}</h3>
             ${availableHtml}
           </section>
 
@@ -479,7 +479,7 @@
       modal.className = "modal";
       modal.innerHTML = `<div class="modal-content settings-modal-content">
         <h2>Paramètres de la composition</h2>
-        <p>Toutes les questions du sujet sont affichées sur une page.</p>
+        <p>Les questions du sujet sont affichées une par une.</p>
         <p>Durée : 60 minutes. Le devoir est envoyé automatiquement à la fin du temps.</p>
         <p>La surveillance des sorties de page et des actions détectables est activée.</p>
         <button class="btn-green" type="button" onclick="closeModal()">Fermer</button>
